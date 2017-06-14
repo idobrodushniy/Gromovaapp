@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+ {% block content %}
+ {% block links %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'style.css')}}">
+{% endblock %}
+ <form method="POST">
+ <input type="submit" name="q" value ="Сохранить отчёты по БД" class = "knopka">
+ </form>
+

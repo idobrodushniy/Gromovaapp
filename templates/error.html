@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div class="container">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'looserstyle.css')}}">
+
+
+{% if treesupdate %}
+<a href="{{url_for('trees')}}"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму изменения данных в таблице "Деревья"! <br>
+Внимание: в таблице деревьев поле "наименование" является уникальным!</h1>
+{% endif %}
+
+
+
+
+{% if householdupdate %}
+<a href="{{url_for('household')}}"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму изменения данных в таблице "Хозяйства"! <br>
+Внимание: в таблице хозяйств поле "наименование" является уникальным!</h1>
+{% endif %}
+
+
+{% if workersupdate %}
+<a href="{{url_for('workers')}}"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму изменения данных в таблице "Работники"! <br>
+</h1>
+{% endif %}
+
+{% if chiefsupdate %}
+<a href="{{url_for('chiefs')}}"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму изменения данных в таблице "Начальники"! <br>
+</h1>
+{% endif %}
+
+{% if densityupdate %}
+<a href="{{url_for('density')}}"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму изменения данных в таблице "Плотность"! <br>
+</h1>
+{% endif %}
+
+{% if ch_salaryupdate %}
+<a href="{{url_for('ch_salary')}}"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму изменения данных в таблице "Зарплата Начальников"! <br>
+</h1>
+{% endif %}
+
+{% if wk_salaryupdate %}
+<a href="{{url_for('wk_salary')}}"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму изменения данных в таблице "Зарплата Работников"! <br>
+</h1>
+{% endif %}
+
+{% if worktypesupdate %}
+<a href="{{url_for('worktypes')}}"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму изменения данных в таблице "Типы Работ"! <br>
+</h1>
+{% endif %}
+
+{% if apparateupdate %}
+<a href="{{url_for('apparate')}}"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму изменения данных в таблице "Аппаратура"! <br>
+</h1>
+{% endif %}
+
+
+{% if householdadd %}
+<a href="add?q=Хозяйства"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму добавления данных в таблицу "Хозяйства"!Внимание: в таблице хозяйств поле "наименование" является уникальным! <br>
+</h1>
+{% endif %}
+
+{% if chiefsadd %}
+<a href="add?q=Начальники"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму  добавления в таблицу "Начальники"! <br>
+</h1>
+{% endif %}
+
+{% if treesadd %}
+<a href="add?q=Начальники"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму  добавления в таблицу "Деревья"! <br>
+</h1>
+{% endif %}
+
+
+{% if workersadd %}
+<a href="add?q=Работники"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму добавления данных в таблицу "Работники"! <br>
+</h1>
+{% endif %}
+
+{% if densityadd %}
+<a href="add?q=Плотность"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму добавления данных в таблицу "Плотность"! <br>
+Внимание : Комбинация полей "Дерево" и "Хозяйство" является уникальной!
+</h1>
+{% endif %}
+{% if ch_salaryadd %}
+<a href="add?q=ЗарплатаНач"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму добавления данных в таблицу "Зарплата Начальников"! <br>
+Внимание : Каждый начальник может получать только одну зарплату!
+</h1>
+{% endif %}
+{% if wk_salaryadd %}
+<a href="add?q=ЗарплатаРаб"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму добавления данных в таблицу "Зарплата Работников"! <br>
+Внимание : Каждый работник может получать только одну зарплату!
+</h1>
+{% endif %}
+{% if apparateadd %}
+<a href="add?q=Аппаратура"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму добавления данных в таблицу "Аппаратура"! <br>
+</h1>
+{% endif %}
+{% if worktypesadd %}
+<a href="add?q=Типы+работ"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму добавления данных в таблицу "Типы работ"! <br>
+</h1>
+{% endif %}
+{% if wt_wkadd %}
+<a href="add?q=Работник-Типы+работ"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму добавления данных в таблицу "Работник-Типы Работ"!  <br>
+Внимание : Комбинация id работника и id типа работ - уникальна!
+</h1>
+{% endif %}
+{% if app_housadd %}
+<a href="add?q=Хозяйство-Аппаратура"><button id="button" class="button">Назад к таблице</button></a>
+<h1 class ="myheader1">Упс:\Произошла ошибка! Введён неверный формат данных в форму добавления данных в таблицу "Хозяйство-Аппаратура"! <br>
+Внимание : Комбинация id хозяйства и id аппаратуры - уникальна!
+</h1>
+{% endif %}
+<script type="text/javascript" src ="{{url_for('static', filename = 'looser.js')}}"></script>
+</body>
+</html>

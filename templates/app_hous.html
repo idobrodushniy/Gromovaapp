@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'style.css')}}">
+{% endblock %}
+{% block content %}
+		<h1 class ="myheader1">Хозяйство - Аппаратура</h1>
+		<table class = "mytable1">
+			<thead>
+			<tr>
+				<th ><strong>Хозяйство</strong></th>
+				<th ><strong>Аппаратура</strong></th>
+			</tr>
+			</thead>
+			<tbody>
+				{% for i in content %}
+				<tr>
+				<td>{{i[0]}}</td>
+				<td>{{i[1]}}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		
+{% endblock %}

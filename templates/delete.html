@@ -1,0 +1,401 @@
+{% extends 'base.html' %}
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'style.css')}}">
+{% endblock %}
+{% block content %}
+	<form>
+		<input type="submit" name="q" value ="Хозяйства" class = "knopka">
+		<input type = "submit" name ="q" value = "Начальники" class = "knopka">
+		<input type = "submit" name ="q" value = "Деревья" class = "knopka">
+		<input type = "submit" name ="q" value = "Работники" class = "knopka">
+		<input type = "submit" name ="q" value = "ЗарплатаНач" class = "knopka">
+		<input type = "submit" name ="q" value = "ЗарплатаРаб" class = "knopka">
+		<input type = "submit" name ="q" value = "Аппаратура" class = "knopka">
+		<input type = "submit" name ="q" value = "Типы работ" class = "knopka">
+		<input type = "submit" name ="q" value = "Плотность" class = "knopka">
+		<input type = "submit" name ="q" value = "Работник-Типы работ" class = "knopka">
+		<input type = "submit" name ="q" value = "Хозяйство-Аппаратура" class = "knopka">
+	</form>
+	{% if starter%}
+	<h1>Для удаления значений из какой либо таблицы выберите один из пунктов меню выше, соответствующий названию необходимой вам таблицы.</h1>
+	{% endif %}
+	{% if trees %}
+	<h1 class ="myheader1">Деревья</h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>ID</strong></th>
+			<th><strong>Наименование</strong></th>
+			<th><strong>Классификация</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			<td>{{i[2]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+
+		<form class="choice-btn" method = 'POST'>
+				<p>Выберите ID Дерева для удаления</p>
+				
+				<select name = "choice">
+					{% for i in content %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<input name="Submit" type ="submit" class = "knopka" value = "Удалить">
+		</form>
+	{% endif %}
+	{% if chiefs %}
+	<h1 class ="myheader1">Начальники</h1>
+		<table class = "mytable1" >
+		<thead >
+		<tr >
+			<th ><strong>ID</strong></th>
+			<th><strong>ФИО</strong></th>
+			<th><strong>Адрес</strong></th>
+			<th><strong>Место работы</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			<td>{{i[2]}}</td>
+			<td>{{i[3]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+		<form class="choice-btn" method = 'POST'>
+				<p>Выберите ID Начальника для удаления</p>
+				
+				<select name = "choice">
+					{% for i in content %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<input name="Submit" type ="submit" class = "knopka" value = "Удалить">
+		</form>
+	{% endif %}
+
+	{% if household %}
+	<h1 class ="myheader1">Хозяйства</h1>
+		<table class = "mytable1">
+		<tr>
+			<th ><strong>ID</strong></th>
+			<th><strong>Наименование</strong></th>
+			<th><strong>Площадь</strong></th>
+			<th><strong>Состояние зелёного массива</strong></th>
+		</tr>
+		{% for i in content %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		<td>{{i[2]}}</td>
+		<td>{{i[3]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+		<form class="choice-btn" method = 'POST'>
+				<p>Выберите ID Хозяйства для удаления</p>
+				
+				<select name = "choice">
+					{% for i in content %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<input name="Submit" type ="submit" class = "knopka" value = "Удалить">
+		</form>
+	{% endif %}
+
+	{% if workers %}
+	<h1 class ="myheader1">Работники</h1>
+		<table class = "mytable1" >
+			<strong>
+			<tr>
+				<th ><strong>ID</strong></th>
+				<th><strong>Имя</strong></th>
+				<th><strong>Фамилия</strong></th>
+				<th><strong>Отчество</strong></th>
+				<th><strong>Дата рождения</strong></th>
+				<th><strong>Адрес</strong></th>
+				<th><strong>Начальник</strong></th>
+			</tr>
+			</strong>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			<td>{{i[2]}}</td>
+			<td>{{i[3]}}</td>
+			<td>{{i[4]}}</td>
+			<td>{{i[5]}}</td>
+			<td>{{i[6]}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<form class="choice-btn" method = 'POST'>
+				<p>Выберите ID Работника для удаления</p>
+				
+				<select name = "choice">
+					{% for i in content %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<input name="Submit" type ="submit" class = "knopka" value = "Удалить">
+		</form>
+	{% endif %}
+	
+	{% if density %}
+	<h1 class ="myheader1">Плотность</h1>
+		<table  class = "mytable1" >
+		<strong>
+		<tr>
+			<th ><strong>Хозяйство</strong></th>
+			<th><strong>Дерево</strong></th>
+			<th><strong>Плотность</strong></th>
+			<th><strong>Средний возраст</strong></th>
+		</tr>
+		</strong>
+		{% for i in content %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		<td>{{i[2]}}</td>
+		<td>{{i[3]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	<form class="choice-btn" method="POST" >
+				<p>Выберите ID Хозяйства</p>
+				
+				<select name = "choice">
+					{% for i in id_hshl %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<p>Выберите ID Дерева</p>
+				<select name = "choice1">
+					{% for i in id_tree %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<input name="Submit" type ="submit" class = "knopka" value = "Удалить">
+	</form>
+	{% endif %}
+
+	{% if ch_salary %}
+	<h1 class ="myheader1">Зарплата начальников</h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>ID начальника</strong></th>
+			<th><strong>Зарплата</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+		
+	<form method = 'POST' class="choice-btn">
+				<p>Выберите ID Начальника</p>
+				
+				<select name = "choice">
+					{% for i in content %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<input name="Submit" type ="submit" class = "knopka" value = "Удалить">
+
+	</form>
+	{% endif %}
+
+	{% if wk_salary %}
+	<h1 class ="myheader1">Зарплата работников</h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>ID работника</strong></th>
+			<th><strong>Зарплата</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+		
+	<form method = 'POST' class="choice-btn">
+				<p>Выберите ID Работника</p>
+				
+				<select name = "choice">
+					{% for i in content %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<input name="Submit" type ="submit" class = "knopka" value = "Удалить">
+
+	</form>
+	{% endif %}
+
+	{% if apparate%}
+		<h1 class ="myheader1">Аппаратура</h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>ID</strong></th>
+			<th><strong>Аппаратура</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+		
+	<form method = 'POST' class="choice-btn">
+				<p>Выберите ID</p>
+				
+				<select name = "choice">
+					{% for i in content %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<input name="Submit" type ="submit" class = "knopka" value = "Удалить">
+
+	</form>
+	{% endif %}
+
+	{% if worktypes%}
+	<h1 class ="myheader1">Типы работ </h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>ID</strong></th>
+			<th><strong>Тип работы</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+	
+		<form method = 'POST' class="choice-btn">
+				<p>Выберите ID</p>
+				<select name = "choice">
+					{% for i in content %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<input name="Submit" type ="submit" class = "knopka" value = "Удалить">
+		</form>
+	{% endif %}
+
+	{% if wt_wk%}
+	<h1 class ="myheader1">Виды работ - работники</h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>Работник</strong></th>
+			<th ><strong>Тип работы</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+
+	<form class="choice-btn" method="POST" >
+				<p>Выберите ID Рабочего</p>
+				
+				<select name = "choice">
+					{% for i in id_wk %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<p>Выберите ID Типа работ</p>
+				<select name = "choice1">
+					{% for i in id_wt %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<input name="Submit" type ="submit" class = "knopka" value = "Удалить">
+	</form>
+	{% endif %}
+
+	{% if app_hous%}
+	<h1 class ="myheader1">Хозяйство - Аппаратура </h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>Хозяйство</strong></th>
+			<th ><strong>Аппаратура</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+
+	<form class="choice-btn" method="POST" >
+				<p>Выберите ID Хозяйства</p>
+				
+				<select name = "choice">
+					{% for i in id_hshl%}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<p>Выберите ID Аппаратуры</p>
+				<select name = "choice1">
+					{% for i in id_app %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<input name="Submit" type ="submit" class = "knopka" value = "Удалить">
+	</form>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'style.css')}}">
+{% endblock %}
+{% block content %}
+		<h1 class ="myheader1">Плотность</h1>
+		<table  class = "mytable1" >
+		<strong>
+		<tr>
+			<th ><strong>Хозяйство</strong></th>
+			<th><strong>Дерево</strong></th>
+			<th><strong>Плотность</strong></th>
+			<th><strong>Средний возраст</strong></th>
+		</tr>
+		</strong>
+		{% for i in content %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		<td>{{i[2]}}</td>
+		<td>{{i[3]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	<form class="choice-btn">
+				<p>Выберите ID Хозяйства</p>
+				
+				<select name = "choice">
+					{% for i in id_hshl %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<p>Выберите ID Дерева</p>
+				<select name = "choice1">
+					{% for i in id_tree %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<input name="Submit" type ="submit" class = "knopka" value = "Выбрать">
+	</form>
+	
+	{% if form %}
+	<div class="household-fields">
+		<form method="POST">
+			<ul class="first-row">
+				<li>
+					<p>Хозяйство</p>
+					<input type="text" readonly name = "id_hshl" value ="{{form[0][0]}}">
+				</li>
+				<li>
+					<p>Дерево</p>
+					<input type="text" readonly  name ="id_tree" value ="{{form[0][1]}}">
+				</li>
+			</ul>
+			<ul class="second-row">
+				<li>
+					<p>Коєф. плотности</p>
+					<input type="text" name ="treedensity" value ="{{form[0][2]}}" required>
+				</li>
+				<li>
+					<p>Средний возраст</p>
+					<input type="text" name ="middleage" value ="{{form[0][3]}}" required>
+				</li>
+			</ul>
+				<input type="submit" value ="Изменить" class="hh-sbm">
+		</form>
+	</div>
+	{% endif %}
+	
+{% endblock %}

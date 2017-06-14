@@ -1,0 +1,533 @@
+{% extends 'base.html' %}
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'style.css')}}">
+{% endblock %}
+{% block content %}
+	<form>
+		<input type="submit" name="q" value ="Хозяйства" class = "knopka">
+		<input type = "submit" name ="q" value = "Начальники" class = "knopka">
+		<input type = "submit" name ="q" value = "Деревья" class = "knopka">
+		<input type = "submit" name ="q" value = "Работники" class = "knopka">
+		<input type = "submit" name ="q" value = "ЗарплатаНач" class = "knopka">
+		<input type = "submit" name ="q" value = "ЗарплатаРаб" class = "knopka">
+		<input type = "submit" name ="q" value = "Аппаратура" class = "knopka">
+		<input type = "submit" name ="q" value = "Типы работ" class = "knopka">
+		<input type = "submit" name ="q" value = "Плотность" class = "knopka">
+		<input type = "submit" name ="q" value = "Работник-Типы работ" class = "knopka">
+		<input type = "submit" name ="q" value = "Хозяйство-Аппаратура" class = "knopka">
+	</form> 
+	{% if starter%}
+	<h1>Для добавления значений в какую либо таблицу выберите один из пунктов меню выше, соответствующий названию необходимой вам таблицы.</h1>
+	{% endif %}
+
+	{% if householdadd %}
+	<h1 class ="myheader1">Хозяйства</h1>
+		<table class = "mytable1">
+		<tr>
+			<th ><strong>ID</strong></th>
+			<th><strong>Наименование</strong></th>
+			<th><strong>Площадь</strong></th>
+			<th><strong>Состояние зел. массива</strong></th>
+		</tr>
+		{% for i in content %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		<td>{{i[2]}}</td>
+		<td>{{i[3]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	<div class="household-fields">
+		<form method="POST">
+			<ul class="first-row">
+				<li>
+					<p>Наименование</p>
+					<input type="text" name = "name" value ="" required>
+				</li>
+				<li>
+					<p>Площадь</p>
+					<input type="text" name ="space" value ="" required>
+				</li>
+			</ul>
+			<ul class="second-row">
+				<li>
+					<p>Состояние зел. массива</p>
+					<input type="text" name ="status" value ="" required>
+				</li>
+			</ul>
+				<input type="submit" value ="Добавить" class="hh-sbm">
+		</form>
+	</div>
+	{% endif %}
+
+	{% if chiefsadd %}
+		<h1 class ="myheader1">Начальники</h1>
+		<table class = "mytable1" >
+		<thead >
+		<tr >
+			<th ><strong>ID</strong></th>
+			<th><strong>ФИО</strong></th>
+			<th><strong>Адрес</strong></th>
+			<th><strong>Место работы</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			<td>{{i[2]}}</td>
+			<td>{{i[3]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+
+	<div class = "chiefs-form">
+		<form method="POST">
+				<ul class="first-list">
+					<li>
+						<span>ФИО</span>	
+						<input type="text" name = "initials" value ="" required>
+					</li>
+					<li>
+						<span class="job">Место работы</span>
+						<select  name = "id_hshl">
+						{% for i in id_hshl %}
+							<option>{{i[0]}}</option>
+						{% endfor %}
+						</select>
+					</li>
+				</ul>
+				<ul class="second-list">
+					<li>
+						<span>Адрес</span>
+						<input type="text" name ="adress" value ="" required>
+					</li>
+					<li>
+							<input type="submit" value ="Добавить" class="subm">
+					</li>
+				</ul>
+		</form>
+	</div>
+	{% endif %}
+
+	{% if treesadd %}
+		<h1 class ="myheader1">Деревья</h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>ID</strong></th>
+			<th><strong>Наименование</strong></th>
+			<th><strong>Классификация</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			<td>{{i[2]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+		<div class = "chiefs-form">
+	<form method="POST">
+			<ul class="first-list">
+				<li>
+					<span>Название дерева</span>	
+					<input type="text" name = "name" value ="" required>
+				</li>
+			</ul>
+			<ul class="second-list">
+				<li>
+					<span>Вид дерева</span>
+					<input type="text" name ="type" value ="" required>
+				</li>
+				<li>
+					<input type="submit" value ="Добавить" class="subm">
+				</li>
+			</ul>
+	</form>
+	</div>
+	{% endif %}
+	
+
+
+	{% if workersadd %}
+		<h1 class ="myheader1">Работники</h1>
+		<table class = "mytable1" >
+		<strong>
+		<tr>
+			<th ><strong>ID</strong></th>
+			<th><strong>Имя</strong></th>
+			<th><strong>Фамилия</strong></th>
+			<th><strong>Отчество</strong></th>
+			<th><strong>Дата рождения</strong></th>
+			<th><strong>Адрес</strong></th>
+			<th><strong>Начальник</strong></th>
+		</tr>
+		</strong>
+		{% for i in content %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		<td>{{i[2]}}</td>
+		<td>{{i[3]}}</td>
+		<td>{{i[4]}}</td>
+		<td>{{i[5]}}</td>
+		<td>{{i[6]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+		<div class="workers-fields">
+	<form method="POST" class="workers-form">
+	<ul class="first-column">
+		<li>
+			<p>Имя</p>
+			<input type="text" name = "name" value ="" required>
+		</li>
+		<li>
+			<p>Фамилия</p>
+			<input type="text" name ="surname" value ="" required>
+		</li>
+		<li>
+			<p>Отчество</p>
+			<input type="text" name ="midname" value ="" required>
+		</li>
+	</ul>	
+	<ul class="second-column">
+		<li>
+		<p>Дата рождения</p>
+		<input type="date" name ="birthday" value ="" required>
+		</li>
+		<li>
+		<p>Адрес</p>
+		<input type="text" name ="adress" value ="" required>
+		</li>
+		<li>
+		<p>ID Начальника</p>
+		<select name = "id_chief"  >
+				{% for i in id_chiefs %}
+					<option>{{i[0]}}</option>
+				{% endfor %}
+			</select>
+		</li>
+		<li>
+		
+		</li>
+	</ul>
+	<input type="submit" value ="Добавить" class="sbm-workers">
+	</form>
+	</div>
+	{% endif %}
+
+	{% if densityadd %}
+		<h1 class ="myheader1">Плотность</h1>
+		<table  class = "mytable1" >
+		<strong>
+		<tr>
+			<th ><strong>Хозяйство</strong></th>
+			<th><strong>Дерево</strong></th>
+			<th><strong>Плотность</strong></th>
+			<th><strong>Средний возраст</strong></th>
+		</tr>
+		</strong>
+		{% for i in content %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		<td>{{i[2]}}</td>
+		<td>{{i[3]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+
+		<div class="household-fields">
+		<form method="POST">
+			<ul class="first-row">
+				<li>
+					<p>Хозяйство</p>
+					<select name = "id_hshl"  >
+					{% for i in id_hshl %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+			</select>
+				</li>
+				<li>
+					<p>Дерево</p>
+					<select name = "id_tree"  >
+					{% for i in id_tree %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+			</select>
+				</li>
+			</ul>
+			<ul class="second-row">
+				<li>
+					<p>Коєф. плотности</p>
+					<input type="text" name ="treedensity" value ="" required>
+				</li>
+				<li>
+					<p>Средний возраст</p>
+					<input type="text" name ="middleage" value ="" required>
+				</li>
+			</ul>
+				<input type="submit" value ="Добавить" class="hh-sbm">
+		</form>
+	</div>
+	{% endif %}
+
+	{% if ch_salaryadd %}
+
+	<h1 class ="myheader1">Зарплата начальников</h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>ID начальника</strong></th>
+			<th><strong>Зарплата</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+	
+	<div class="household-fields">
+		<form method="POST">
+			<ul class="first-row">
+				<li>
+					<p>Начальник</p>
+					<select name = "id_chief"  >
+					{% for i in id_chiefs %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+			</select>
+				</li>
+				</li>
+			</ul>
+			<ul class="second-row">
+				<li>
+					<p>Зарплата</p>
+					<input type="text" name ="ch_salary" value ="" required>
+				</li>
+			</ul>
+				<input type="submit" value ="Добавить" class="hh-sbm">
+		</form>
+	</div>
+	{% endif %}
+
+	{% if wk_salaryadd %}
+
+	<h1 class ="myheader1">Зарплата работников</h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>ID работника</strong></th>
+			<th><strong>Зарплата</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			  <tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+	
+	<div class="household-fields">
+		<form method="POST">
+			<ul class="first-row">
+				<li>
+					<p>Работник</p>
+					<select name = "id_wk"  >
+					{% for i in id_wk%}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+			</select>
+				</li>
+				</li>
+			</ul>
+			<ul class="second-row">
+				<li>
+					<p>Зарплата</p>
+					<input type="text" name ="wk_salary" value ="" required>
+				</li>
+			</ul>
+				<input type="submit" value ="Добавить" class="hh-sbm">
+		</form>
+	</div>
+	{% endif %}
+
+
+	{% if apparateadd %}
+		<h1 class ="myheader1">Аппаратура</h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>ID</strong></th>
+			<th><strong>Аппаратура</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+
+	<div class = "chiefs-form">
+		<form method="POST">
+				<ul class="second-list">
+					<li>
+						<span>Аппаратура</span>
+						<input type="text" name ="type" value ="" required>
+					</li>
+					<li>
+						<input type="submit" value ="Добавить" class="subm">
+					</li>
+				</ul>
+		</form>
+		</div>
+	{% endif%}
+
+	{% if worktypesadd %}
+
+	<h1 class ="myheader1">Типы работ </h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>ID</strong></th>
+			<th><strong>Тип работы</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+
+		<div class = "chiefs-form">
+		<form method="POST">
+				<ul class="second-list">
+					<li>
+						<span>Тип работы</span>
+						<input type="text" name ="type" value ="" required>
+					</li>
+					<li>
+						<input type="submit" value ="Добавить" class="subm">
+					</li>
+				</ul>
+		</form>
+		</div>
+	{% endif %}
+
+	{% if wt_wkadd %}
+	<h1 class ="myheader1">Виды работ - работники</h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>Работник</strong></th>
+			<th ><strong>Тип работы</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+	<div class="household-fields">
+		<form method="POST">
+			<ul class="first-row">
+				<li>
+					<p>Работник</p>
+					<select name = "id_wk"  >
+					{% for i in id_wk %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+					</select>
+				</li>
+				<li>
+					<p>Тип работы</p>
+					<select name = "id_wt"  >
+					{% for i in id_wt %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+					</select>
+				</li>
+			</ul>
+				<input type="submit" value ="Добавить" class="hh-sbm">
+		</form>
+	</div>
+	{% endif %}
+	{% if app_housadd %}
+	<h1 class ="myheader1">Хозяйства - Аппаратура</h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>Хозяйство</strong></th>
+			<th ><strong>Аппаратура</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+	<div class="household-fields">
+		<form method="POST">
+			<ul class="first-row">
+				<li>
+					<p>Хозяйство</p>
+					<select name = "id_hshl"  >
+					{% for i in id_hshl %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+					</select>
+				</li>
+				<li>
+					<p>Аппаратура</p>
+					<select name = "id_app"  >
+					{% for i in id_app %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+					</select>
+				</li>
+			</ul>
+				<input type="submit" value ="Добавить" class="hh-sbm">
+		</form>
+	</div>
+	{% endif %}
+{% endblock %}

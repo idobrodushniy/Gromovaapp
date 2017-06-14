@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'style.css')}}">
+{% endblock %}
+
+{% block content %}
+		<h1 class ="myheader1">Типы работ </h1>
+		<table class = "mytable1">
+		<thead>
+		<tr>
+			<th ><strong>ID</strong></th>
+			<th><strong>Тип работы</strong></th>
+		</tr>
+		</thead>
+		
+		<tbody>
+			{% for i in content %}
+			<tr>
+			<td>{{i[0]}}</td>
+			<td>{{i[1]}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+	
+		<form class="choice-btn">
+				<p>Выберите ID</p>
+				<select name = "choice">
+					{% for i in content %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<input name="Submit" type ="submit" class = "knopka" value = "Выбрать">
+
+		</form>
+
+	{% if form %}
+	<div class = "chiefs-form">
+	<form method="POST">
+			<ul class="first-list">
+				<li>
+					<span>ID </span>	
+					<input type="text" name="id" value ="{{form[0][0]}}" readonly>
+				</li>
+			</ul>
+			<ul class="second-list">
+				<li>
+					<span>Вид работы</span>
+					<input type="text" name ="type" value ="{{form[0][1]}}" required>
+				</li>
+				<li>
+					<input type="submit" value ="Изменить" class="subm">
+				</li>
+			</ul>
+	</form>
+	</div>
+	{% endif %}
+{% endblock %}

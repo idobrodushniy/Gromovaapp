@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'style.css')}}">
+{% endblock %}
+{% block content %}
+		<h1 class ="myheader1">Хозяйства</h1>
+		<table class = "mytable1">
+		<tr>
+			<th ><strong>ID</strong></th>
+			<th><strong>Наименование</strong></th>
+			<th><strong>Площадь</strong></th>
+			<th><strong>Состояние зелёного массива</strong></th>
+		</tr>
+		{% for i in content %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		<td>{{i[2]}}</td>
+		<td>{{i[3]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+
+<form class="choice-btn">
+				<p>Выберите ID</p>
+				
+				<select name = "choice">
+					{% for i in content %}
+						<option>{{i[0]}}</option>
+					{% endfor %}
+				</select>
+				<input name="Submit" type ="submit" class = "knopka" value = "Выбрать">
+		</form>
+	
+
+	{% if form %}
+	<div class="household-fields">
+		<form method="POST">
+			<ul class="first-row">
+				<li>
+					<p>Наименование</p>
+					<input type="text" name = "name" value ="{{form[0][1]}}" required>
+				</li>
+				<li>
+					<p>Площадь</p>
+					<input type="text" name ="space" value ="{{form[0][2]}}" required>
+				</li>
+			</ul>
+			<ul class="second-row">
+				<li>
+					<p>Состояние зел. массива</p>
+					<input type="text" name ="status" value ="{{form[0][3]}}" required>
+				</li>
+			</ul>
+				<input type="submit" value ="Изменить" class="hh-sbm">
+		</form>
+	</div>
+	{% endif %}
+{% endblock %}

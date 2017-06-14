@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% block links %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename = 'style.css')}}">
+{% endblock %}
+{% block content %}
+	<form>
+		<input type="submit" name="q" value ="Запрос1" class = "knopka">
+		<input type = "submit" name ="q" value = "Запрос2" class = "knopka">
+		<input type = "submit" name ="q" value = "Запрос3" class = "knopka">
+		<input type = "submit" name ="q" value = "Запрос4" class = "knopka">
+		<input type = "submit" name ="q" value = "Запрос5" class = "knopka">
+		<input type = "submit" name ="q" value = "Запрос6" class = "knopka">
+		<input type = "submit" name ="q" value = "Запрос7" class = "knopka">
+		<input type = "submit" name ="q" value = "Запрос8" class = "knopka">
+		<input type = "submit" name ="q" value = "Запрос9" class = "knopka">
+		<input type = "submit" name ="q" value = "Запрос10" class = "knopka">
+	</form>
+	{% if starter%}
+	<h1>Для добавления значений в какую либо таблицу выберите один из пунктов меню выше, соответствующий названию необходимой вам таблицы.</h1>
+	{% endif %}
+
+	{% if query1%}
+		<div style = "font-size: 20px;"><b>Запрос на выборку с проекцией :</b> Выбираем из табицы работников id, имена, фамилии и отчества всех работников, которые работают на начальника с id=1.<br><b>Код запроса:</b>SELECT * FROM Workers WHERE id_chief = 1 </div>
+		<table class = "mytable1" >
+		<strong>
+		<tr>
+			<th ><strong>ID</strong></th>
+			<th><strong>Имя</strong></th>
+			<th><strong>Фамилия</strong></th>
+			<th><strong>Отчество</strong></th>
+		</tr>
+		</strong>
+		{% for i in query1 %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		<td>{{i[2]}}</td>
+		<td>{{i[3]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	{% endif %}
+
+	{% if query2%}
+		<div style = "font-size: 20px;"><b>Сложный запрос на выборку с проекцией :</b> Вывести на экран названия всех деревьев, хотя бы одно из которых имеет коэффициент плотнсти > 30 хотя бы на одном из хозяйств.<br><b>Код запроса:</b>SELECT name from Trees WHERE id IN (SELECT DISTINCT id_tree FROM density  WHERE treedensity > 30); </div>
+		<table class = "mytable1" style = "width:50%;">
+		<strong>
+		<tr>
+			<th ><strong>Дерево</strong></th>
+		</tr>
+		</strong>
+		{% for i in query2 %}
+		<tr>
+		<td>{{i[0]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	{% endif %}
+
+	{% if query3 %}
+		<div style = "font-size: 20px;"><b>Запрос на выборку с группировкой:</b>Вывести на экран id всех работников и количество разных типов работ, которые они выполняют.<br><b>Код запроса :SELECT id_wk,count(*) AS Count_works  FROM Wt_Wk GROUP BY id_wk;</b></div>
+		<table class = "mytable1" >
+		<strong>
+		<tr>
+			<th ><strong>ID работника</strong></th>
+			<th><strong>Количество типов работ</strong></th>
+		</tr>
+		</strong>
+		{% for i in query3 %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	{% endif %}
+
+
+	{% if query4 %}
+	<div style = "font-size: 20px; width:90%" ><b>Сложный запрос на выборку с группировкой,условием и агрегирующей ф-ей COUNT():</b>Вывести инициалы всех работников, которые выполняют все существующие виды работ.<br><b>Код запроса :</b>SELECT name,surname,midname from Workers where id in (SELECT id_wk from Wt_Wk GROUP BY id_wk having COUNT(*) = <br>(SELECT COUNT(id) FROM Worktypes));</div>
+	<table class = "mytable1" >
+		<strong>
+		<tr>
+			<th><strong>Имя</strong></th>
+			<th><strong>Фамилия</strong></th>
+			<th><strong>Отчество</strong></th>
+		</tr>
+		</strong>
+		{% for i in query4 %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		<td>{{i[2]}}</td>
+		<td>{{i[3]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	{% endif %}
+
+	{% if query5 %}
+	<div style = "font-size: 20px; width:90%" ><b>Запрос на выборку с агрегирующей ф-ей AVG():</b>Получить среднюю зарплату всех работников.<br><b>Код запроса :</b>SELECT AVG(salary) FROM Wk_Salary;</div>
+	<table class = "mytable1" style = " width:70%"  >
+		<strong>
+		<tr>
+			<th><strong>Средняя зарплата</strong></th>
+		</tr>
+		</strong>
+		{% for i in query5 %}
+		<tr>
+		<td>{{i[0]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	{% endif %}
+
+	{% if query6 %}
+	<div style = "font-size: 20px; width:90%" ><b>Запрос на выборку(разность):</b>Вывести на экран название и id аппаратуры, которая не используется ни в одном из хозяйств.<br><b>Код запроса:</b>SELECT id,name FROM Apparate WHERE id NOT IN (SELECT id_app FROM App_Hous));</div>
+	<table class = "mytable1" style = " width:70%"  >
+		<strong>
+		<tr>
+		<th><strong>ID</strong></th>
+			<th><strong>Название Аппаратуры</strong></th>
+		</tr>
+		</strong>
+		{% for i in query6 %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	{% endif %}
+
+	{% if query7 %}
+	<div style = "font-size: 20px; width:90%" ><b>Запрос на выборку(объединение):</b>Вывести на экран результат объединения двух таблиц(деревья,плотность).<br><b>Код запроса:</b>SELECT id_hshl,id_tree FROM density UNION SELECT id,name FROM Trees;</div>
+	<table class = "mytable1" style = " width:70%"  >
+		<strong>
+		<tr>
+		<th><strong>ID </strong></th>
+			<th><strong>Дерево</strong></th>
+		</tr>
+		</strong>
+		{% for i in query7 %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	{% endif %}
+
+	{% if query8 %}
+	<div style = "font-size: 20px; width:90%" ><b>Запрос на выборку(пересечение):</b>Вывести id и имена работников, которые выполняют хотябы один тип работ.<br><b>Код запроса:</b>SELECT id,name FROM Workers WHERE id  IN (SELECT id_wk from Wt_Wk) ORDER BY id;</div>
+	<table class = "mytable1" style = " width:70%"  >
+		<strong>
+		<tr>
+		<th><strong>ID </strong></th>
+			<th><strong>Имя</strong></th>
+		</tr>
+		</strong>
+		{% for i in query8 %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	{% endif %}
+
+	{% if query9 %}
+	<div style = "font-size: 20px; width:90%" ><b>Запрос на выборку(соединение):</b>Вывести на экран результат соединения таблиц Работник и Начальников по полям id начальника = id начальника,на котрого работает работник<br><b>Код запроса:</b>SELECT Workers.id,name,surname,midname,birthday,Workers.adress,Chiefs.id,initials,Chiefs.adress FROM Workers JOIN Chiefs on Chiefs.id = Workers.id_chief ORDER BY Workers.id;</div>
+	<table class = "mytable1" style = " width:70%"  >
+		<strong>
+		<tr>
+		<th><strong>ID работника </strong></th>
+		<th><strong>Имя</strong></th>
+		<th><strong>Фамилия</strong></th>
+		<th><strong>Отчество</strong></th>
+		<th><strong>Дата Рождения </strong></th>
+		<th><strong>Адрес</strong></th>
+		<th><strong>ID начальника</strong></th>
+		<th><strong>Инициалы</strong></th>
+		<th><strong>Адрес</strong></th>
+		</tr>
+		</strong>
+		{% for i in query9 %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		<td>{{i[2]}}</td>
+		<td>{{i[3]}}</td>
+		<td>{{i[4]}}</td>
+		<td>{{i[5]}}</td>
+		<td>{{i[6]}}</td>
+		<td>{{i[7]}}</td>
+		<td>{{i[8]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	{% endif %}
+
+	{% if query10 %}
+	<div style = "font-size: 20px; width:90%" ><b>Запрос на выборку(соединение):</b>Вывести на экран результат соединения таблиц Хозяйства и Начальники по полям id Хозяйства = id Хозяйства, на котором работает начальник<br><b>Код запроса:</b>SELECT Household.id,Household.name,Household.space,Household.status,Chiefs.id,Chiefs.initials,Chiefs.adress from Household JOIN Chiefs ON Chiefs.id_hshl = Household.id ORDER BY Household.id;</div>
+	<table class = "mytable1" style = " width:70%"  >
+		<strong>
+		<tr>
+		<th><strong>ID Хозяйства </strong></th>
+		<th><strong>Название Хозяйства</strong></th>
+		<th><strong>Площадь</strong></th>
+		<th><strong>Состояние зелёного массива</strong></th>
+		<th><strong>ID начальника</strong></th>
+		<th><strong>Инициалы</	strong></th>
+		<th><strong>Адрес</strong></th>
+		</tr>
+		</strong>
+		{% for i in query10 %}
+		<tr>
+		<td>{{i[0]}}</td>
+		<td>{{i[1]}}</td>
+		<td>{{i[2]}}</td>
+		<td>{{i[3]}}</td>
+		<td>{{i[4]}}</td>
+		<td>{{i[5]}}</td>
+		<td>{{i[6]}}</td>
+		</tr>
+		{% endfor %}
+		</table>
+	{% endif %}
+{% endblock %}
